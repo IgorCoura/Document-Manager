@@ -20,7 +20,7 @@ public class UpdateDocumentModel {
     private String nameDocument;
     private String category;
     private String status;
-    private LocalDate archivingDate;
-    private LocalDate dueDate;
+    private LocalDate archivingDate = LocalDate.MIN;
+    private LocalDate dueDate = LocalDate.MIN;
 
 }

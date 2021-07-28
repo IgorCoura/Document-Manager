@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class DocumentModel {
 
     private long id;
-    private BaseEntity Entity;
+    private long idEntity;
     private String nameDocument;
     private String category;
     private String status;

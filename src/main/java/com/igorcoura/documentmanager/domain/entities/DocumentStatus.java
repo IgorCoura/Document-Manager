@@ -12,10 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class DocumentStatus {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String status;
-    private String description;
     @OneToMany
     private List<Document> document;
 }

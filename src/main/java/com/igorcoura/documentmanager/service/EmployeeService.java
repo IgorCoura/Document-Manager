@@ -27,8 +27,7 @@ public class EmployeeService {
     public EmployeeModel insert(CreateEmployeeModel model){
         var entity = EmployeeMapper.toEntity(model);
         entity.setCompany(companyRepository.getById(model.getIdCompany()));
-        var resp = employeeRepository.save(entity);
-        return EmployeeMapper.toModel(resp);
+        return EmployeeMapper.toModel(employeeRepository.save(entity));
     }
 
     public EmployeeModel update(UpdateEmployeeModel model){

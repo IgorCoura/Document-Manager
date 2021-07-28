@@ -15,9 +15,7 @@ import javax.persistence.*;
 public class DocumentCategory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String category;
-    private String description;
     @OneToMany
     private List<Document> document;
 }
