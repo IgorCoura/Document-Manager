@@ -22,9 +22,8 @@ public class FileComponent {
 
     public void saveFile(MultipartFile file, String path) {
         Path filePath = Paths.get(this.root, path);
-        //Path filePath = directoryPath.resolve(fileName);
         try {
-            //Files.createDirectories(directoryPath);
+            Files.createDirectories(filePath);
             file.transferTo(filePath.toFile());
 
         } catch (IOException e) {

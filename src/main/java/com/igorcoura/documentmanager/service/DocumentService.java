@@ -37,15 +37,42 @@ public class DocumentService {
     private BaseEntityRepository baseEntityRepository;
 
     public DocumentModel insert(CreateDocumentModel model){
-        var enitty = DocumentMapper.toEntity(model);
-        enitty.setCategory(documentCategoryCustomRepository.findByCategory(model.getCategory()));
-        enitty.setStatus(documentStatusCustomRepository.findByStatus(model.getStatus()));
-        enitty.setEntity(baseEntityRepository.getById(model.getIdEntity()));
-        var resp = documentRepository.save(enitty);
-        return DocumentMapper.toModel(resp);
-
+        var entity = DocumentMapper.toEntity(model);
+        entity.setCategory(documentCategoryCustomRepository.findByCategory(model.getCategory()));
+        entity.setStatus(documentStatusCustomRepository.findByStatus(model.getStatus()));
+        entity.setEntity(baseEntityRepository.getById(model.getIdEntity()));
+        entity.setPath(entity.getEntity().getId()+"/"+entity.getNameDocument());
+        var resp = DocumentMapper.toModel(documentRepository.save(entity));
+        resp.setFileLink("/api/file/"+entity.getId());
+        return resp;
     }
 
+    public DocumentModel update(UpdateDocumentModel model){
+        var entity = DocumentMapper.toEntity(model);
+        entity.setCategory(documentCategoryCustomRepository.findByCategory(model.getCategory()));
+        entity.setStatus(documentStatusCustomRepository.findByStatus(model.getStatus()));
+        entity.setEntity(baseEntityRepository.getById(model.getIdEntity()));
+        entity.setPath(entity.getEntity().getId()+"/"+entity.getNameDocument());
+        var resp = DocumentMapper.toModel(documentRepository.save(entity));
+        resp.setFileLink("/api/file/"+entity.getId());
+        return resp;
+    }
 
+    public DocumentModel recover(long id){
+        var entity = documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document with id = "+id+", not found"));
+        var resp =DocumentMapper.toModel(entity);
+        resp.setFileLink("/api/file/"+entity.getId());
+        return resp;
+    }
 
+    public List<DocumentModel> recoverAll(){
+        var entity = documentRepository.findAll();
+        var resp =DocumentMapper.toModel(entity);
+        resp.stream().forEach(m -> m.setFileLink("/api/file/"+m.getId()));
+        return resp;
+    }
+
+    public void delete(long id){
+        documentRepository.deleteById(id);
+    }
 }

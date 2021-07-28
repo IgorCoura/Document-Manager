@@ -25,6 +25,7 @@ public class DocumentModel {
     private String nameDocument;
     private String category;
     private String status;
+    private String fileLink;
     private LocalDate archivingDate;
     private LocalDate dueDate;
 

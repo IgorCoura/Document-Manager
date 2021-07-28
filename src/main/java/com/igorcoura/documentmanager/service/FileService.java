@@ -1,10 +1,16 @@
 package com.igorcoura.documentmanager.service;
 
 import com.igorcoura.documentmanager.component.FileComponent;
+import com.igorcoura.documentmanager.domain.entities.BaseEntity;
+import com.igorcoura.documentmanager.infra.repository.BaseEntityRepository;
+import com.igorcoura.documentmanager.infra.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class FileService {
@@ -13,13 +19,18 @@ public class FileService {
     @Autowired
     private FileComponent fileComponent;
 
-    public void save(String entity, String id){
+    @Autowired
+    private DocumentRepository documentRepository;
 
-        //pegar o tipo da entidade
-
-        //pegar o tipo da entidade e buscar pelo id para returnar o caminho onde o arquivo sera salvo(no caminho tambem tera o nome do arquivo)
-
-        //passar nessa função o arquivo e o caminho onde o arquivo será salvo
-        //fileComponent.saveFile(file, "arquivo02.pdf");
+    public void save(MultipartFile file, long id){
+        var document = documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document with id = "+id+", not found"));
+        fileComponent.saveFile(file, document.getPath());
     }
+
+    public InputStreamResource recover(long id){
+        var document = documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document with id = "+id+", not found"));
+        return fileComponent.recoverFile(document.getPath());
+    }
+
+
 }
