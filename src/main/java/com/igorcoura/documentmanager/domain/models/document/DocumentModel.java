@@ -1,4 +1,4 @@
-package com.igorcoura.documentmanager.domain.models;
+package com.igorcoura.documentmanager.domain.models.document;
 
 import com.igorcoura.documentmanager.domain.entities.BaseEntity;
 import com.igorcoura.documentmanager.domain.entities.DocumentCategory;
@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,10 +21,11 @@ import java.time.LocalDateTime;
 public class DocumentModel {
 
     private long id;
-    private BaseEntity entity;
+    private BaseEntity Entity;
     private String nameDocument;
-    private DocumentCategory category;
-    private DocumentStatus status;
-    private LocalDateTime archivingDate;
-    private LocalDateTime dueDate;
+    private String category;
+    private String status;
+    private LocalDate archivingDate;
+    private LocalDate dueDate;
+
 }

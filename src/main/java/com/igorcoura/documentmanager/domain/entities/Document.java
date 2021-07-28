@@ -4,6 +4,7 @@ package com.igorcoura.documentmanager.domain.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -26,7 +27,7 @@ public class Document{
     private DocumentCategory category;
     @ManyToOne
     private DocumentStatus status;
-    private LocalDateTime archivingDate;
-    private LocalDateTime dueDate;
+    private LocalDate archivingDate;
+    private LocalDate dueDate;
 
 }

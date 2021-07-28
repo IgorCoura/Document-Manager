@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.igorcoura.documentmanager.domain.entities.Company;
-import com.igorcoura.documentmanager.domain.models.CompanyModel;
-import com.igorcoura.documentmanager.domain.models.CreateCompanyModel;
-import com.igorcoura.documentmanager.domain.models.DocumentModel;
+import com.igorcoura.documentmanager.domain.models.company.CompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.CreateCompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.UpdateCompanyModel;
 
 public class CompanyMapper {
 
@@ -17,7 +17,8 @@ public class CompanyMapper {
                 .cnpj(model.getCnpj())
                 .build();
     }
-    public static Company toEntity(CompanyModel model){
+
+    public static Company toEntity(UpdateCompanyModel model){
         var company = Company.builder()
                 .name(model.getName())
                 .cnpj(model.getCnpj())

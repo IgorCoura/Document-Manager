@@ -14,13 +14,13 @@ import java.util.List;
 @Builder
 public class Employee extends BaseEntity{
 
-
     @Column(nullable = false)
-    private String nome;
+    private String name;
     @Column(nullable = false, unique = true)
     private String cpf;
     @ManyToOne
     private Company company;
     @OneToMany
     private List<Document> document;
+
 }

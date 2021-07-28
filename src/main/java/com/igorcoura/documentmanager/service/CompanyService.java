@@ -1,8 +1,9 @@
 package com.igorcoura.documentmanager.service;
 
+import com.igorcoura.documentmanager.domain.models.company.UpdateCompanyModel;
 import com.igorcoura.documentmanager.infra.repository.CompanyRepository;
-import com.igorcoura.documentmanager.domain.models.CompanyModel;
-import com.igorcoura.documentmanager.domain.models.CreateCompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.CompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.CreateCompanyModel;
 import com.igorcoura.documentmanager.infra.shared.CompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class CompanyService {
         return CompanyMapper.toModel(entity);
     }
 
-    public CompanyModel update(CompanyModel companyModel){
+    public CompanyModel update(UpdateCompanyModel companyModel){
         var entity = companyRepository.save(CompanyMapper.toEntity(companyModel));
         return CompanyMapper.toModel(entity);
     }

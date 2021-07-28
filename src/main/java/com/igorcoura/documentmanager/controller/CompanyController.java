@@ -1,7 +1,8 @@
 package com.igorcoura.documentmanager.controller;
 
-import com.igorcoura.documentmanager.domain.models.CompanyModel;
-import com.igorcoura.documentmanager.domain.models.CreateCompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.CompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.CreateCompanyModel;
+import com.igorcoura.documentmanager.domain.models.company.UpdateCompanyModel;
 import com.igorcoura.documentmanager.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class CompanyController {
     }
 
     @PutMapping
-    public ResponseEntity<CompanyModel> update(@RequestBody CompanyModel model){
+    public ResponseEntity<CompanyModel> update(@RequestBody UpdateCompanyModel model){
         var resp = companyService.update(model);
         return ResponseEntity.status(HttpStatus.OK).body(resp);
     }
