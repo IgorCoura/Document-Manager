@@ -1,5 +1,6 @@
 package com.igorcoura.documentmanager.controller;
 
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
 import com.igorcoura.documentmanager.domain.models.document.DocumentCategoryModel;
 import com.igorcoura.documentmanager.domain.models.document.DocumentStatusModel;
 import com.igorcoura.documentmanager.service.DocumentCategoryService;
@@ -27,6 +28,11 @@ public class DocumentCategoryController {
     @GetMapping
     public ResponseEntity<List<DocumentCategoryModel>> recoverAll(){
         return ResponseEntity.status(HttpStatus.OK).body(documentCategoryService.recoverAll());
+    }
+
+    @GetMapping("/{entity}")
+    public ResponseEntity<List<DocumentCategoryModel>> recoverAll(@RequestParam("entity") EntitiesEnum entity){
+        return ResponseEntity.status(HttpStatus.OK).body(documentCategoryService.recoverAllByEntity(entity));
     }
 
     @DeleteMapping("/{category}")

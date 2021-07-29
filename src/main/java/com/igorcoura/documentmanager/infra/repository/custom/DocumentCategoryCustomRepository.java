@@ -1,8 +1,10 @@
 package com.igorcoura.documentmanager.infra.repository.custom;
 
 import com.igorcoura.documentmanager.domain.entities.DocumentCategory;
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.swing.text.html.parser.Entity;
@@ -18,6 +20,13 @@ public class DocumentCategoryCustomRepository {
         var q = entityManager.createQuery(query, DocumentCategory.class);
         q.setParameter("category", category);
         return q.getSingleResult();
+    }
+
+    public List<DocumentCategory> findAllByEntity(EntitiesEnum entity){
+        String query = "select C from DocumentCategory as C where C.entity = :entity";
+        var q = entityManager.createQuery(query, DocumentCategory.class);
+        q.setParameter("entity", entity);
+        return q.getResultList();
     }
 
 }

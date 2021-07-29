@@ -1,5 +1,6 @@
 package com.igorcoura.documentmanager.domain.models.document;
 
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
 import lombok.*;
 
 @Getter
@@ -8,5 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class DocumentCategoryModel {
+    private EntitiesEnum entity;
     private String category;
 }

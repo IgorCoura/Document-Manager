@@ -1,25 +1,18 @@
 package com.igorcoura.documentmanager.domain.entities;
 
 import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@IdClass(DocumentStatusId.class)
-public class DocumentStatus {
-
-    @Id
+public class DocumentStatusId implements Serializable {
     private String status;
-    @Id
     private EntitiesEnum entity;
-    @OneToMany
-    private List<Document> document;
 }

@@ -1,5 +1,6 @@
 package com.igorcoura.documentmanager.controller;
 
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
 import com.igorcoura.documentmanager.domain.models.company.CompanyModel;
 import com.igorcoura.documentmanager.domain.models.company.CreateCompanyModel;
 import com.igorcoura.documentmanager.domain.models.company.UpdateCompanyModel;
@@ -28,6 +29,11 @@ public class DocumentStatusController {
     @GetMapping
     public ResponseEntity<List<DocumentStatusModel>> recoverAll(){
         return ResponseEntity.status(HttpStatus.OK).body(documentStatusService.recoverAll());
+    }
+
+    @GetMapping("/{entity}")
+    public ResponseEntity<List<DocumentStatusModel>> recoverAll(@RequestParam("entity")EntitiesEnum entity){
+        return ResponseEntity.status(HttpStatus.OK).body(documentStatusService.recoverAllByEntity(entity));
     }
 
     @DeleteMapping("/{status}")

@@ -1,8 +1,7 @@
 package com.igorcoura.documentmanager.service;
 
-import com.igorcoura.documentmanager.domain.entities.Document;
-import com.igorcoura.documentmanager.domain.entities.DocumentCategory;
-import com.igorcoura.documentmanager.domain.entities.DocumentStatus;
+import com.igorcoura.documentmanager.domain.entities.*;
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
 import com.igorcoura.documentmanager.domain.models.document.CreateDocumentModel;
 import com.igorcoura.documentmanager.domain.models.document.DocumentModel;
 import com.igorcoura.documentmanager.domain.models.document.UpdateDocumentModel;
@@ -36,22 +35,72 @@ public class DocumentService {
     @Autowired
     private BaseEntityRepository baseEntityRepository;
 
-    public DocumentModel insert(CreateDocumentModel model){
+    public DocumentModel insert(CreateDocumentModel model) throws Exception {
         var entity = DocumentMapper.toEntity(model);
-        entity.setCategory(documentCategoryCustomRepository.findByCategory(model.getCategory()));
-        entity.setStatus(documentStatusCustomRepository.findByStatus(model.getStatus()));
-        entity.setEntity(baseEntityRepository.getById(model.getIdEntity()));
+
+        var baseEntity = baseEntityRepository.getById(model.getIdEntity());
+        var status =documentStatusCustomRepository.findByStatus(model.getStatus());
+        var category= documentCategoryCustomRepository.findByCategory(model.getCategory());
+
+        if(baseEntity.toString().contains("Company")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else if(baseEntity.toString().contains("CompanyWorks")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else if(baseEntity.toString().contains("Employee")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else{
+            throw  new Exception("Entity erro");
+        }
+
+        entity.setCategory(category);
+        entity.setStatus(status);
+        entity.setEntity(baseEntity);
+
         entity.setPath(entity.getEntity().getId()+"/"+entity.getNameDocument());
         var resp = DocumentMapper.toModel(documentRepository.save(entity));
         resp.setFileLink("/api/file/"+entity.getId());
         return resp;
     }
 
-    public DocumentModel update(UpdateDocumentModel model){
+    public DocumentModel update(UpdateDocumentModel model) throws Exception {
         var entity = DocumentMapper.toEntity(model);
-        entity.setCategory(documentCategoryCustomRepository.findByCategory(model.getCategory()));
-        entity.setStatus(documentStatusCustomRepository.findByStatus(model.getStatus()));
-        entity.setEntity(baseEntityRepository.getById(model.getIdEntity()));
+
+        var baseEntity = baseEntityRepository.getById(model.getIdEntity());
+        var status =documentStatusCustomRepository.findByStatus(model.getStatus());
+        var category= documentCategoryCustomRepository.findByCategory(model.getCategory());
+
+        if(baseEntity.toString().contains("Company")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else if(baseEntity.toString().contains("CompanyWorks")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else if(baseEntity.toString().contains("Employee")){
+            if(status.getEntity() != EntitiesEnum.Company || category.getEntity() != EntitiesEnum.Company ){
+                throw  new Exception("Category or status does not belong to that entity.");
+            }
+        }
+        else{
+            throw  new Exception("Entity erro");
+        }
+
+        entity.setCategory(category);
+        entity.setStatus(status);
+        entity.setEntity(baseEntity);
+
         entity.setPath(entity.getEntity().getId()+"/"+entity.getNameDocument());
         var resp = DocumentMapper.toModel(documentRepository.save(entity));
         resp.setFileLink("/api/file/"+entity.getId());

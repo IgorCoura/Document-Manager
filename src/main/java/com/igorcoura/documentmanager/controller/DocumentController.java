@@ -22,13 +22,13 @@ public class DocumentController {
     private DocumentService documentService;
 
     @PostMapping
-    public ResponseEntity<DocumentModel> register(@RequestBody CreateDocumentModel model){
+    public ResponseEntity<DocumentModel> register(@RequestBody CreateDocumentModel model) throws Exception {
         var resp = documentService.insert(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }
 
     @PutMapping
-    public ResponseEntity<DocumentModel> update(@RequestBody UpdateDocumentModel model){
+    public ResponseEntity<DocumentModel> update(@RequestBody UpdateDocumentModel model) throws Exception {
         var resp = documentService.update(model);
         return ResponseEntity.status(HttpStatus.OK).body(resp);
     }

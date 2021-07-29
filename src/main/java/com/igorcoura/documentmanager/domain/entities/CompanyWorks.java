@@ -20,5 +20,4 @@ public class CompanyWorks extends BaseEntity{
     private String description;
     @OneToMany
     private List<Document> document;
-
 }
