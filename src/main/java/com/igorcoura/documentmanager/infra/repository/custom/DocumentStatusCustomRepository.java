@@ -14,17 +14,27 @@ public class DocumentStatusCustomRepository {
     @Autowired
     private EntityManager entityManager;
 
-    public DocumentStatus findByStatus(String status){
-        String query = "select C from DocumentStatus as C where C.status = :status";
-        var q = entityManager.createQuery(query, DocumentStatus.class);
-        q.setParameter("status", status);
-        return q.getSingleResult();
-    }
 
-    public List<DocumentStatus> findAllByEntity(EntitiesEnum entity){
-        String query = "select C from DocumentStatus as C where C.entity = :entity";
+    public List<DocumentStatus> findAll(String status, EntitiesEnum entity){
+        String query = "select C from DocumentStatus as C";
+        String condition = " where ";
+        if(status != null && status != ""){
+            query += condition + "C.status = :status";
+            condition = " and ";
+        }
+
+        if(entity != null){
+            query += condition + "C.entity = :entity";
+            condition = " and ";
+        }
         var q = entityManager.createQuery(query, DocumentStatus.class);
-        q.setParameter("entity", entity);
+
+        if(status != null && status != ""){
+            q.setParameter("status", status);
+        }
+        if(entity != null) {
+            q.setParameter("entity", entity);
+        }
         return q.getResultList();
     }
 

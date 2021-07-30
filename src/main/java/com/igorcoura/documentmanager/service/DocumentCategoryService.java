@@ -37,13 +37,12 @@ public class DocumentCategoryService {
         return entity.stream().map(e -> DocumentCategoryModel.builder().category(e.getCategory()).entity(e.getEntity()).build()).collect(Collectors.toList());
     }
 
-    public List<DocumentCategoryModel> recoverAllByEntity(EntitiesEnum entity){
-        var resp = documentCategoryCustomRepository.findAllByEntity(entity);
+    public List<DocumentCategoryModel> recoverAll(String category, EntitiesEnum entity){
+        var resp = documentCategoryCustomRepository.findAll(category, entity);
         return resp.stream().map(e -> DocumentCategoryModel.builder().category(e.getCategory()).entity(e.getEntity()).build()).collect(Collectors.toList());
     }
 
     public void delete(String category){
-        var entity = documentCategoryCustomRepository.findByCategory(category);
-        documentCategoryRepository.delete(entity);
+
     }
 }

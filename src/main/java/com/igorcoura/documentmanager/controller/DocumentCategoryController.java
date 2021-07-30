@@ -30,9 +30,10 @@ public class DocumentCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(documentCategoryService.recoverAll());
     }
 
-    @GetMapping("/{entity}")
-    public ResponseEntity<List<DocumentCategoryModel>> recoverAll(@RequestParam("entity") EntitiesEnum entity){
-        return ResponseEntity.status(HttpStatus.OK).body(documentCategoryService.recoverAllByEntity(entity));
+    @GetMapping("/search")
+    public ResponseEntity<List<DocumentCategoryModel>> recoverAll(@RequestParam(required = false, name="category") String category, @RequestParam(required = true, name = "entity") EntitiesEnum entity){
+        var resp = documentCategoryService.recoverAll(category, entity);
+        return ResponseEntity.status(HttpStatus.OK).body(resp);
     }
 
     @DeleteMapping("/{category}")

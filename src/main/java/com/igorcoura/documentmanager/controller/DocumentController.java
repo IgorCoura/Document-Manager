@@ -1,6 +1,7 @@
 package com.igorcoura.documentmanager.controller;
 
 import com.igorcoura.documentmanager.domain.models.document.CreateDocumentModel;
+import com.igorcoura.documentmanager.domain.models.document.DocumentDataModel;
 import com.igorcoura.documentmanager.domain.models.document.DocumentModel;
 import com.igorcoura.documentmanager.domain.models.document.UpdateDocumentModel;
 import com.igorcoura.documentmanager.domain.models.employee.CreateEmployeeModel;
@@ -8,6 +9,7 @@ import com.igorcoura.documentmanager.domain.models.employee.EmployeeModel;
 import com.igorcoura.documentmanager.domain.models.employee.UpdateEmployeeModel;
 import com.igorcoura.documentmanager.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +43,12 @@ public class DocumentController {
     @GetMapping("/{id}")
     public ResponseEntity<DocumentModel> recover(@RequestParam("id") long id) {
         return ResponseEntity.status(HttpStatus.OK).body(documentService.recover(id));
+    }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<DocumentModel>> recoverAll(DocumentDataModel model){
+        var resp =documentService.recoverAll(model);
+        return ResponseEntity.status(HttpStatus.OK).body(resp);
     }
 
     @DeleteMapping("/{id}")

@@ -15,17 +15,26 @@ public class DocumentCategoryCustomRepository {
     @Autowired
     private EntityManager entityManager;
 
-    public DocumentCategory findByCategory(String category){
-        String query = "select C from DocumentCategory as C where C.category = :category";
-        var q = entityManager.createQuery(query, DocumentCategory.class);
-        q.setParameter("category", category);
-        return q.getSingleResult();
-    }
+    public List<DocumentCategory> findAll(String category, EntitiesEnum entity){
+        String query = "select C from DocumentCategory as C";
+        String condition = " where ";
+        if(category != null && category != ""){
+            query += condition + "C.category = :category";
+            condition = " and ";
+        }
+        if(entity != null){
+            query += condition + "C.entity = :entity";
+            condition =" and ";
+        }
 
-    public List<DocumentCategory> findAllByEntity(EntitiesEnum entity){
-        String query = "select C from DocumentCategory as C where C.entity = :entity";
         var q = entityManager.createQuery(query, DocumentCategory.class);
-        q.setParameter("entity", entity);
+
+        if(category != null && category != ""){
+            q.setParameter("category", category);
+        }
+        if(entity != null){
+            q.setParameter("entity", entity);
+        }
         return q.getResultList();
     }
 

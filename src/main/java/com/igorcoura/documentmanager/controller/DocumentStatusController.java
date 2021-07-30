@@ -31,9 +31,9 @@ public class DocumentStatusController {
         return ResponseEntity.status(HttpStatus.OK).body(documentStatusService.recoverAll());
     }
 
-    @GetMapping("/{entity}")
-    public ResponseEntity<List<DocumentStatusModel>> recoverAll(@RequestParam("entity")EntitiesEnum entity){
-        return ResponseEntity.status(HttpStatus.OK).body(documentStatusService.recoverAllByEntity(entity));
+    @GetMapping("/search")
+    public ResponseEntity<List<DocumentStatusModel>> recoverAll(@RequestParam(value = "status", required = false) String status, @RequestParam("entity") EntitiesEnum entity){
+        return ResponseEntity.status(HttpStatus.OK).body(documentStatusService.recoverAll(status, entity));
     }
 
     @DeleteMapping("/{status}")

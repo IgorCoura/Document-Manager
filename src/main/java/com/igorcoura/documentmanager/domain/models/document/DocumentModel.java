@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @Builder
 public class DocumentModel {
 
-    private long id;
-    private long idEntity;
+    private Long id;
+    private Long idEntity;
     private String nameDocument;
     private String category;
     private String status;
