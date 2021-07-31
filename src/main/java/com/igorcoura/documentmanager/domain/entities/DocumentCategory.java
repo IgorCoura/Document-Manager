@@ -22,7 +22,7 @@ public class DocumentCategory {
     private String category;
     @Id
     private EntitiesEnum entity;
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Document> document;
 }
 

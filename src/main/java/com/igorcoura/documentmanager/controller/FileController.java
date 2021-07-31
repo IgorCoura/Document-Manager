@@ -28,7 +28,7 @@ public class FileController {
         var body = fileService.recover(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_PDF)
-                .header("Content-disposition", "attachment; filename="+body.getFilename())
+                .header("Content-disposition", "attachment; filename="+id)
                 .body(body);
     }
 }

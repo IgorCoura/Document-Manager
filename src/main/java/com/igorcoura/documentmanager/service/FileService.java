@@ -29,8 +29,7 @@ public class FileService {
 
     public InputStreamResource recover(long id){
         var document = documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document with id = "+id+", not found"));
-        return fileComponent.recoverFile(document.getPath());
+        return  fileComponent.recoverFile(document.getPath());
     }
-
 
 }

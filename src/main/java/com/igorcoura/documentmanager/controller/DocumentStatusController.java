@@ -1,9 +1,7 @@
 package com.igorcoura.documentmanager.controller;
 
 import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
-import com.igorcoura.documentmanager.domain.models.company.CompanyModel;
-import com.igorcoura.documentmanager.domain.models.company.CreateCompanyModel;
-import com.igorcoura.documentmanager.domain.models.company.UpdateCompanyModel;
+import com.igorcoura.documentmanager.domain.models.document.CreateDocumentStatusModel;
 import com.igorcoura.documentmanager.domain.models.document.DocumentStatusModel;
 import com.igorcoura.documentmanager.service.DocumentStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class DocumentStatusController {
     private DocumentStatusService documentStatusService;
 
     @PostMapping
-    public ResponseEntity<DocumentStatusModel> register(@RequestBody DocumentStatusModel model){
+    public ResponseEntity<DocumentStatusModel> register(@RequestBody CreateDocumentStatusModel model){
         var resp = documentStatusService.insert(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }

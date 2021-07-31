@@ -18,7 +18,7 @@ public class Company extends BaseEntity {
     private String name;
     @Column(nullable = false, unique = true)
     private String cnpj;
-    @OneToMany
+    @OneToMany(mappedBy = "entity")
     private List<Document> document;
 
 }

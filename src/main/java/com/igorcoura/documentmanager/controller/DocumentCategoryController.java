@@ -1,8 +1,9 @@
 package com.igorcoura.documentmanager.controller;
 
 import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
+import com.igorcoura.documentmanager.domain.models.document.CreateDocumentCategoryModel;
+import com.igorcoura.documentmanager.domain.models.document.CreateDocumentStatusModel;
 import com.igorcoura.documentmanager.domain.models.document.DocumentCategoryModel;
-import com.igorcoura.documentmanager.domain.models.document.DocumentStatusModel;
 import com.igorcoura.documentmanager.service.DocumentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class DocumentCategoryController {
     private DocumentCategoryService documentCategoryService;
 
     @PostMapping
-    public ResponseEntity<DocumentCategoryModel> register(@RequestBody DocumentCategoryModel model){
+    public ResponseEntity<DocumentCategoryModel> register(@RequestBody CreateDocumentCategoryModel model){
         var resp = documentCategoryService.insert(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }

@@ -1,12 +1,13 @@
 package com.igorcoura.documentmanager.infra.shared;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.igorcoura.documentmanager.domain.entities.Document;
-import com.igorcoura.documentmanager.domain.models.document.CreateDocumentModel;
-import com.igorcoura.documentmanager.domain.models.document.DocumentModel;
-import com.igorcoura.documentmanager.domain.models.document.UpdateDocumentModel;
+import com.igorcoura.documentmanager.domain.enums.EntitiesEnum;
+import com.igorcoura.documentmanager.domain.models.document.*;
 
 
 public class DocumentMapper {
@@ -48,6 +49,27 @@ public class DocumentMapper {
             return null;
         }
         return entity.stream().map(e -> toModel(e)).collect(Collectors.toList());
+    }
+
+    public static DocumentDataModel toModel(CreateDocumentDataModel model){
+        var doc = DocumentDataModel.builder()
+                .category(model.getCategory())
+                .id(model.getId())
+                .idEntity(model.getIdEntity())
+                .nameDocument(model.getNameDocument())
+                .status(model.getStatus())
+                .build();
+        if(model.getArchivingDate() != null){
+            var archivingDateString = model.getArchivingDate().split("-");
+            var ArchivingDateNumber = Arrays.stream(archivingDateString).map(e-> Integer.parseInt(e)).collect(Collectors.toList());
+            doc.setArchivingDate(LocalDate.of(ArchivingDateNumber.get(0),ArchivingDateNumber.get(1),ArchivingDateNumber.get(2)));
+        }
+        if(model.getDueDate() != null){
+            var dueDateString = model.getDueDate().split("-");
+            var dueDateNumber = Arrays.stream(dueDateString).map(e -> Integer.parseInt(e)).collect(Collectors.toList());
+            doc.setDueDate(LocalDate.of(dueDateNumber.get(0),dueDateNumber.get(1),dueDateNumber.get(2)));
+        }
+        return doc;
     }
 
 }

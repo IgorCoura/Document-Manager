@@ -10,8 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DocumentStatusModel {
+public class CreateDocumentStatusModel {
     private EntitiesEnum entity;
-    private String status;
-    private List<DocumentModel> documentModel;
+    private String category;
 }

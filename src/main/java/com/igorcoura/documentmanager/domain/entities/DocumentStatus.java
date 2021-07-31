@@ -20,6 +20,6 @@ public class DocumentStatus {
     private String status;
     @Id
     private EntitiesEnum entity;
-    @OneToMany
+    @OneToMany(mappedBy = "status")
     private List<Document> document;
 }

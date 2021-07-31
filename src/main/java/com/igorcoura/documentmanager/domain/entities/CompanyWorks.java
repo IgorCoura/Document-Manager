@@ -18,6 +18,6 @@ public class CompanyWorks extends BaseEntity{
     private Company company;
     private String name;
     private String description;
-    @OneToMany
+    @OneToMany(mappedBy = "entity")
     private List<Document> document;
 }

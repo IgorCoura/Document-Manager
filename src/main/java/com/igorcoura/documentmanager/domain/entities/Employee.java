@@ -20,7 +20,7 @@ public class Employee extends BaseEntity{
     private String cpf;
     @ManyToOne
     private Company company;
-    @OneToMany
+    @OneToMany(mappedBy = "entity")
     private List<Document> document;
 
 }
